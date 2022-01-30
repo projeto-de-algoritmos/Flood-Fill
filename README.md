@@ -4,33 +4,28 @@
 **Conteúdo da Disciplina**: Grafos 1<br>
 
 ## Alunos
-|Matrícula | Aluno |
-| -- | -- |
-| 18/0028324  |  Thiago Luiz de Souza Gomes |
-| 18/0033743  |  João Pedro Silva de Carvalho |
 
-## Sobre 
-Link da [apresentação](https://youtu.be/WYPGSKC2Hhk)
+| Matrícula  | Aluno                 |
+| ---------- | --------------------- |
+| 18/0125885 | Lucas Melo dos Santos |
+
+## Sobre
 
 ## Screenshots
-![primeira tela](screenshots/primeiratela.jpg)
-<br>
-![segunda tela](screenshots/segundatela.jpg)
-<br>
-![terceira tela](screenshots/terceiratela.jpg)
-<br>
 
-## Instalação 
-**Linguagem**: Python<br>
-Baixar python3.5 ou mais nova 
+## Instalação
 
-## Uso 
-Rodar o comando python3 main.py no terminal.
+**Linguagem**: Javascript<br>
+**Framework**: React<br>
 
+## Uso
 
-## Outros 
+```
+yarn
+
+yarn dev
+```
+
+## Outros
+
 Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
-
-
-
-
