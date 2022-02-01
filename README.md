@@ -1,4 +1,4 @@
-# SpeedGraph
+# Flood fill
 
 **Número da Lista**: 1<br>
 **Conteúdo da Disciplina**: Grafos 1<br>
@@ -21,6 +21,9 @@
 ## Uso
 
 ```
+
+cd Flood-fill/flood_fill
+
 yarn
 
 yarn dev
