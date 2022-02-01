@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import Board from '../Board';
+import { SketchPicker } from 'react-color';
+import { BoardWrapper } from './styles';
+
 export default function Game() {
 
   const randomColor = (colors, numberOfColors) =>  {
@@ -28,23 +31,29 @@ export default function Game() {
   const [squareSize, setSquareSize] = useState(20)
   const [squaresPerRow, setSquaresPerRow] = useState(50)
   const [squares, setSquares] = useState(createSquares(colors, squaresPerRow, numberOfColors))
-
+  const[pickedColor, setPickedColor] = useState()
 
 
 
   
+  const handleColorChange = (color) => {
+    setPickedColor(color.hex)
+  };
 
   console.log(squareSize, squaresPerRow, numberOfColors, squares, colors)
+
     return (
-      <div>
+      <BoardWrapper>
+       <div> <SketchPicker color={pickedColor} onChangeComplete={handleColorChange} /></div>
           <Board 
             squareSize={squareSize}
             squaresPerRow={squaresPerRow}
             numberOfColors={numberOfColors}
             squares={squares}
             colors={colors}
+            pickedColor={pickedColor}
           />
-      </div>
+      </BoardWrapper>
     )
   
 }

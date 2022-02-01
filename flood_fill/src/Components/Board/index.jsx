@@ -3,17 +3,17 @@ import { waitRenderSquare } from '../../utils/waitRenderSquare';
 import Square from '../Square';
 import { Row } from './styles';
 
-export default function Board({squareSize, squaresPerRow, numberOfColors, squares, colors}) {
+export default function Board({squareSize, squaresPerRow, numberOfColors, squares, pickedColor}) {
  
 const [fillableSquares, setSquares] = useState(squares)
-const getUniqueRandomColor = (color) =>  {
-  const numberBetweenZeroAndFour = Math.floor((Math.random() * numberOfColors));
-  if (color === colors[numberBetweenZeroAndFour]) {
-    return getUniqueRandomColor(color);
-  } else {
-    return  colors[numberBetweenZeroAndFour];
-  }
-}
+// const getUniqueRandomColor = (color) =>  {
+//   const numberBetweenZeroAndFour = Math.floor((Math.random() * numberOfColors));
+//   if (color === colors[numberBetweenZeroAndFour]) {
+//     return getUniqueRandomColor(color);
+//   } else {
+//     return  colors[numberBetweenZeroAndFour];
+//   }
+// }
 
 const setVisitedFalse = (squares) => {
   for (let i = 0; i < squares.length; i++) {
@@ -23,10 +23,13 @@ const setVisitedFalse = (squares) => {
   }
 }
 
+console.log('COLOR',pickedColor)
 
 const floodFill = useCallback (async (i, j) =>  {
   const oldColor = squares[i][j].color;
-  const newColor = getUniqueRandomColor(oldColor);
+  const newColor = pickedColor
+  console.log('new',pickedColor)
+
   const squaresToFill = squares;
 
   const squareArray = [];
@@ -62,7 +65,7 @@ const floodFill = useCallback (async (i, j) =>  {
  
 
  setVisitedFalse(squares);
-}, [])
+}, [pickedColor, squares, squaresPerRow])
 
 
 
