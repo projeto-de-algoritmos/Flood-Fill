@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Board from '../Board';
 import { SketchPicker } from 'react-color';
-import { BoardWrapper } from './styles';
+import * as S from './styles';
 
 export default function Game() {
 
@@ -12,26 +12,32 @@ export default function Game() {
 
   const createSquares = (colors, squaresPerRow, numberOfColors)  => {
     const squares = []
+    const bottomSquares = []
     for(let i = 0; i < squaresPerRow; i++) {
       squares[i] = [];
+      bottomSquares[i] = [];
       for(let j = 0; j < squaresPerRow; j++) {
         squares[i][j] = {
           color: randomColor(colors, numberOfColors),
           visited: false
         }
+        bottomSquares[i][j] = {
+          color: randomColor(colors, numberOfColors),
+          visited: false
+        }
       }
     }
-    return squares;
+    return {top: squares, bottom: bottomSquares};
   }
   
- const initialColors = ['red', 'blue', 'green']
+ const initialColors = ['#4D4D4D', '#4D4D4D', '#4D4D4D']
 
   const [numberOfColors, setNumberOfColors] = useState(3)
   const [colors, setColors] = useState(initialColors)
   const [squareSize, setSquareSize] = useState(20)
-  const [squaresPerRow, setSquaresPerRow] = useState(50)
+  const [squaresPerRow, setSquaresPerRow] = useState(10)
   const [squares, setSquares] = useState(createSquares(colors, squaresPerRow, numberOfColors))
-  const[pickedColor, setPickedColor] = useState()
+  const[pickedColor, setPickedColor] = useState('#22194D')
 
 
 
@@ -43,17 +49,20 @@ export default function Game() {
   console.log(squareSize, squaresPerRow, numberOfColors, squares, colors)
 
     return (
-      <BoardWrapper>
-       <div> <SketchPicker color={pickedColor} onChangeComplete={handleColorChange} /></div>
+      <S.Container>
+      <div> <SketchPicker color={pickedColor} onChangeComplete={handleColorChange} /></div>
+      <div>
           <Board 
-            squareSize={squareSize}
+            squareSize={8}
             squaresPerRow={squaresPerRow}
             numberOfColors={numberOfColors}
             squares={squares}
             colors={colors}
             pickedColor={pickedColor}
+            wallSize={300}
           />
-      </BoardWrapper>
+      </div>
+      </S.Container>
     )
   
 }
