@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Board from '../Board';
 import { SketchPicker } from 'react-color';
 import * as S from './styles';
@@ -42,9 +42,11 @@ export default function Game() {
     return { right: rightSquares, left: leftSquares, back: backSquares, front: frontSquares };
   };
 
-  const initialColors = ['red', 'red', 'red'];
+  const initialColors = ['#B4DC94', '#B4DC94', '#B4DC94'];
+  const differentColors = ['#d14fb5', '#dd4c20', '#69cf4f'];
 
   const [numberOfColors, setNumberOfColors] = useState(3);
+  const [uniformColor, setUniformColor] = useState(true);
   const [colors, setColors] = useState(initialColors);
   const [squareSize, setSquareSize] = useState(20);
   const [squaresPerRow, setSquaresPerRow] = useState(10);
@@ -57,8 +59,19 @@ export default function Game() {
     setPickedColor(color.hex);
   };
 
+
   const handleDiagonal = (event) => {
     setPaintDiagonal(event.target.checked);
+  };
+  const handleUniformColor = (event) => {
+    setUniformColor(event.target.checked);
+    console.log(event.target.checked)
+    if(!event.target.checked) {
+      setSquares(createSquares(differentColors, squaresPerRow, numberOfColors))
+    } 
+    else {
+      setSquares(createSquares(initialColors, squaresPerRow, numberOfColors))
+    }
   };
 
   const handleSubmit = (e) => {
@@ -90,9 +103,15 @@ export default function Game() {
           </S.InputsContainer>
           <FormControlLabel
             control={
-              <Checkbox checked={paintDiagonal} onChange={handleDiagonal} aria-label="Checkbox demo" defaultChecked />
+              <Checkbox checked={paintDiagonal} onChange={handleDiagonal} aria-label="Checkbox-diagonal" defaultChecked />
             }
             label="Pintar também na diagonal"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox checked={uniformColor} onChange={handleUniformColor} aria-label="Checkbox-uniform" defaultChecked />
+            }
+            label="Cores uniformes"
           />
         </form>
       </S.FlexOptions>
@@ -103,7 +122,6 @@ export default function Game() {
           numberOfColors={numberOfColors}
           squares={squares}
           paintDiagonal={paintDiagonal}
-          colors={colors}
           pickedColor={pickedColor}
           wallSize={wallSize}
         />

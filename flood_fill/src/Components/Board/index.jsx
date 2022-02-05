@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { waitRenderSquare } from '../../utils/waitRenderSquare';
 import HouseCube from '../HouseCube';
 import Square from '../Square';
@@ -7,6 +7,9 @@ import { Row } from './styles';
 export default function Board({ wallSize, squaresPerRow, squares, pickedColor, paintDiagonal }) {
   const [fillableSquares, setSquares] = useState(squares);
 
+  useEffect(() => {
+    setSquares(squares)
+  }, [squares])
   const setVisitedFalse = (squares) => {
     for (let i = 0; i < squares.length; i++) {
       for (let j = 0; j < squares[i].length; j++) {
