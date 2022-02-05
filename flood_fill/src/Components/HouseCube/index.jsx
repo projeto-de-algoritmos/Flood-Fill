@@ -4,7 +4,6 @@ function HouseCube({children, size}) {
   return (
     <>
       <S.Wrapper>
-        <h2>Pinte as paredes da casa com o algoritmo flood fill</h2>
         <S.Cube>
           <S.Side className="front" size={size}>{children[0]}</S.Side>
           <S.Side className="back" size={size} >{children[1]}</S.Side>

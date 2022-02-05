@@ -56,13 +56,14 @@ export default function Board({ wallSize, squaresPerRow, squares, pickedColor })
 
         squareArray.push([m - 1, n], [m + 1, n]);
         squareArray.push([m, n - 1], [m, n + 1]);
-        // await waitRenderSquare(0.2);
+        await waitRenderSquare(0.2);
         nextSquare.visited = true;
-        // setSquares([...squaresToFill]);
+        setSquares({bottom: fillableSquares.bottom, top: fillableSquares.top, [side]: [...squaresToFill] });
+
 
         nextSquare.color = newColor;
       }
-      // await waitRenderSquare(0.2);
+      await waitRenderSquare(0.2);
   
       setSquares({bottom: fillableSquares.bottom, top: fillableSquares.top, [side]: [...squaresToFill] });
 
