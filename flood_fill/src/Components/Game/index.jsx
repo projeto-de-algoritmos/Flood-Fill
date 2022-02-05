@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Board from '../Board';
 import { SketchPicker } from 'react-color';
 import * as S from './styles';
-import { InputLabel, MenuItem, Select } from '@mui/material';
+import { Checkbox, FormControlLabel, InputLabel, MenuItem, Select } from '@mui/material';
 
 export default function Game() {
   const randomColor = (colors, numberOfColors) => {
@@ -11,23 +11,35 @@ export default function Game() {
   };
 
   const createSquares = (colors, squaresPerRow, numberOfColors) => {
-    const squares = [];
-    const bottomSquares = [];
+    const rightSquares = [];
+    const leftSquares = [];
+    const backSquares = [];
+    const frontSquares = [];
     for (let i = 0; i < squaresPerRow; i++) {
-      squares[i] = [];
-      bottomSquares[i] = [];
+      rightSquares[i] = [];
+      leftSquares[i] = [];
+      backSquares[i] = [];
+      frontSquares[i] = [];
       for (let j = 0; j < squaresPerRow; j++) {
-        squares[i][j] = {
+        rightSquares[i][j] = {
           color: randomColor(colors, numberOfColors),
           visited: false,
         };
-        bottomSquares[i][j] = {
+        leftSquares[i][j] = {
+          color: randomColor(colors, numberOfColors),
+          visited: false,
+        };
+        backSquares[i][j] = {
+          color: randomColor(colors, numberOfColors),
+          visited: false,
+        };
+        frontSquares[i][j] = {
           color: randomColor(colors, numberOfColors),
           visited: false,
         };
       }
     }
-    return { top: squares, bottom: bottomSquares };
+    return { right: rightSquares, left: leftSquares, back: backSquares, front: frontSquares };
   };
 
   const initialColors = ['red', 'red', 'red'];
@@ -39,16 +51,18 @@ export default function Game() {
   const [squares, setSquares] = useState(createSquares(colors, squaresPerRow, numberOfColors));
   const [pickedColor, setPickedColor] = useState('#22194D');
   const [wallSize, setWallSize] = useState(200);
+  const [paintDiagonal, setPaintDiagonal] = useState(false);
 
   const handleColorChange = (color) => {
     setPickedColor(color.hex);
   };
 
-  console.log(squareSize, squaresPerRow, numberOfColors, squares, colors);
+  const handleDiagonal = (event) => {
+    setPaintDiagonal(event.target.checked);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
   };
 
   const handleChange = (e) => setWallSize(e.target.value);
@@ -61,20 +75,25 @@ export default function Game() {
           <SketchPicker color={pickedColor} onChangeComplete={handleColorChange} />
         </div>
         <form onSubmit={handleSubmit}>
-        <InputLabel id="demo-simple-select-helper-label">Select Wall Size</InputLabel>
+          <InputLabel id="demo-simple-select-helper-label">Selecione o tamanho da casa</InputLabel>
           <S.InputsContainer>
-            {/* name="size"  label="House size" type="number" value={wallSize} onChange={handleChange} */}
             <Select
               labelId="demo-simple-select-helper-label"
               id="demo-simple-select-helper"
               value={wallSize}
               onChange={handleChange}
             >
-              <MenuItem value={100}>Small</MenuItem>
-              <MenuItem value={200}>Medium</MenuItem>
-              <MenuItem value={300}>Large</MenuItem>
+              <MenuItem value={100}>Pequena</MenuItem>
+              <MenuItem value={200}>Media</MenuItem>
+              <MenuItem value={300}>Grande</MenuItem>
             </Select>
           </S.InputsContainer>
+          <FormControlLabel
+            control={
+              <Checkbox checked={paintDiagonal} onChange={handleDiagonal} aria-label="Checkbox demo" defaultChecked />
+            }
+            label="Pintar também na diagonal"
+          />
         </form>
       </S.FlexOptions>
       <div>
@@ -83,6 +102,7 @@ export default function Game() {
           squaresPerRow={squaresPerRow}
           numberOfColors={numberOfColors}
           squares={squares}
+          paintDiagonal={paintDiagonal}
           colors={colors}
           pickedColor={pickedColor}
           wallSize={wallSize}
