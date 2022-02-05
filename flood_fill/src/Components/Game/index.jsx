@@ -42,15 +42,12 @@ export default function Game() {
     return { right: rightSquares, left: leftSquares, back: backSquares, front: frontSquares };
   };
 
-  const initialColors = ['#B4DC94', '#B4DC94', '#B4DC94'];
-  const differentColors = ['#d14fb5', '#dd4c20', '#69cf4f'];
+  const initialColors = ['rgba(61, 255, 71, 0.3)', 'rgba(61, 255, 71, 0.3)', 'rgba(61, 255, 71, 0.3)'];
 
   const [numberOfColors, setNumberOfColors] = useState(3);
-  const [uniformColor, setUniformColor] = useState(true);
-  const [colors, setColors] = useState(initialColors);
   const [squareSize, setSquareSize] = useState(20);
   const [squaresPerRow, setSquaresPerRow] = useState(10);
-  const [squares, setSquares] = useState(createSquares(colors, squaresPerRow, numberOfColors));
+  const [squares, setSquares] = useState(createSquares(initialColors, squaresPerRow, numberOfColors));
   const [pickedColor, setPickedColor] = useState('#22194D');
   const [wallSize, setWallSize] = useState(200);
   const [paintDiagonal, setPaintDiagonal] = useState(false);
@@ -62,16 +59,6 @@ export default function Game() {
 
   const handleDiagonal = (event) => {
     setPaintDiagonal(event.target.checked);
-  };
-  const handleUniformColor = (event) => {
-    setUniformColor(event.target.checked);
-    console.log(event.target.checked)
-    if(!event.target.checked) {
-      setSquares(createSquares(differentColors, squaresPerRow, numberOfColors))
-    } 
-    else {
-      setSquares(createSquares(initialColors, squaresPerRow, numberOfColors))
-    }
   };
 
   const handleSubmit = (e) => {
@@ -106,12 +93,6 @@ export default function Game() {
               <Checkbox checked={paintDiagonal} onChange={handleDiagonal} aria-label="Checkbox-diagonal" defaultChecked />
             }
             label="Pintar também na diagonal"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={uniformColor} onChange={handleUniformColor} aria-label="Checkbox-uniform" defaultChecked />
-            }
-            label="Cores uniformes"
           />
         </form>
       </S.FlexOptions>

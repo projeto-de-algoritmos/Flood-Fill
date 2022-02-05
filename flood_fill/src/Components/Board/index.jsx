@@ -33,10 +33,10 @@ export default function Board({ wallSize, squaresPerRow, squares, pickedColor, p
       oldColor = fillableSquares.back[i][j].color;
       squaresToFill = fillableSquares.back;
     }
-    else {
+    else if(side === 'front') {
       oldColor = fillableSquares.front[i][j].color;
       squaresToFill = fillableSquares.front;
-    }
+    } 
     const newColor = pickedColor;
 
     const squareArray = [];

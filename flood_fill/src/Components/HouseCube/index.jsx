@@ -9,6 +9,7 @@ function HouseCube({children, size}) {
           <S.Side className="back" size={size} >{children[1]}</S.Side>
           <S.Side className="right" size={size}>{children[2]}</S.Side>
           <S.Side className="left" size={size}>{children[3]}</S.Side>
+          <S.Side className="bottom" size={size}>{children[4]}</S.Side>
         </S.Cube>
       </S.Wrapper>
     </>
