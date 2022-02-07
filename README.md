@@ -11,7 +11,7 @@
 
 ## Sobre
 
-O projeto utiliza o algoritomo de flood fill para pintar uma caixa que simula as paredes de uma casa. No projeto é possível selecionar o tamanho da casa e também se deseja que o algoritmo possa enxegar os pixeis das diagonais ao visitar um nó. 
+O projeto utiliza o algoritomo de flood fill para pintar uma caixa que simula as paredes de uma casa. No projeto é possível selecionar o tamanho da casa e também se deseja que o algoritmo possa enxegar os pixeis das diagonais ao visitar um nó.
 
 Para que seja possível perceber o funcionamento do algoritmo existe um delay para pintura de cada pixel.
 
@@ -36,7 +36,7 @@ cd Flood-fill/flood_fill
 
 yarn
 
-yarn dev
+yarn start
 ```
 
 ## Outros
